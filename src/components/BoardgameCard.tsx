@@ -1,5 +1,4 @@
 import type { Boardgame } from '@/types/boardgame'
-import { useState } from 'react'
 import Bookmark from './Bookmark'
 import Clock from './icons/Clock'
 import Star from './icons/Star'

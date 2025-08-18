@@ -13,8 +13,8 @@ const SkeletonBoardgameCard = () => {
   const randomWidth = useRef(Math.round(clamp(Math.random() * 10 + 5, 5, 10)))
 
   return (
-    <div className="flex flex-col w-2xs h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
-      <div className="rounded-t-xl w-2xs min-w-2xs max-w-full min-h-50 border-b-3 bg-(--color-red-2)" />
+    <div className="flex flex-col w-2xs min-w-2xs h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
+      <div className="rounded-t-xl min-h-50 border-b-3 bg-(--color-red-2)" />
       <div className="flex flex-col gap-y-2 px-4 py-2 h-full place-content-between">
         <div
           style={{ width: `${titleWidth.current}rem` }}
