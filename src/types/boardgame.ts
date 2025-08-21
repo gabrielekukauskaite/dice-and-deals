@@ -19,3 +19,5 @@ export interface PartialBoardgame extends Partial<Boardgame> {
   rank: number
   name: string
 }
+
+export type BoardgameMap = { [key: string]: PartialBoardgame }
