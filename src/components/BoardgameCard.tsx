@@ -4,6 +4,7 @@ import Clock from './icons/Clock'
 import Star from './icons/Star'
 import Player from './icons/Player'
 import Dollar from './icons/Dollar'
+import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
 
 interface BoardgameCardProps {
   boardgame: Boardgame
@@ -23,10 +24,10 @@ const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
   })()
 
   return (
-    <div className="flex flex-col w-2xs min-w-2xs h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
+    <div className="flex flex-col max-w-3xs min-w-3xs md:max-w-2xs md:min-w-2xs h-70 md:h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
       <div className="relative">
         <img
-          className="rounded-t-xl w-2xs h-50 border-b-3 object-cover"
+          className="rounded-t-xl w-2xs h-30 md:h-50 border-b-3 object-cover"
           alt="boardgame-image"
           src={boardgame.image}
         />
@@ -36,12 +37,14 @@ const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
 
       <div className="flex flex-col gap-y-2 p-4 pt-2 h-full place-content-between">
         <div>
-          <span className="font-bold">{boardgame.name}</span>
+          <span className="font-bold text-sm md:text-base">
+            {decodeHTMLEntities(boardgame.name)}
+          </span>
           &nbsp;
           <span className="text-xs">({boardgame.yearPublished})</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+        <div className="grid grid-cols-2 gap-y-2">
           <div className="flex items-center gap-x-1 text-sm">
             <span className="w-5 h-5">
               <Star />

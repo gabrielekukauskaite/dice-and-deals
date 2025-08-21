@@ -21,7 +21,7 @@ const HotBoardgames = () => {
   ))
 
   return (
-    <div className="flex flex-wrap gap-8 p-8 justify-center bg-(--color-red-1) overflow-auto">
+    <div className="flex flex-wrap gap-8 p-4 md:p-8 justify-center bg-(--color-red-1) overflow-auto">
       {hotBoardgamesLoading ? skeletonCards : boardgameCards}
     </div>
   )
