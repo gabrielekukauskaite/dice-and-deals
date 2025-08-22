@@ -6,6 +6,8 @@ import Player from './icons/Player'
 import Dollar from './icons/Dollar'
 import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
 import type { JSX } from 'react/jsx-dev-runtime'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 interface PropertyFieldProps {
   icon: JSX.Element
@@ -21,11 +23,11 @@ const PropertyField = ({ icon, title }: PropertyFieldProps) => {
   )
 }
 
-interface BoardgameCardProps {
+interface FrontFaceProps {
   boardgame: Boardgame
 }
 
-const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
+const FrontFace = ({ boardgame }: FrontFaceProps) => {
   const playtime = (() => {
     if (boardgame.minPlaytime === 0 || boardgame.maxPlaytime === 0) {
       return '-'
@@ -39,7 +41,7 @@ const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
   })()
 
   return (
-    <div className="flex flex-col max-w-3xs min-w-3xs md:max-w-2xs md:min-w-2xs h-70 md:h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
+    <div className="flex flex-col backface-hidden absolute h-full">
       <div className="relative">
         <img
           className="rounded-t-xl w-2xs h-30 md:h-50 border-b-3 object-cover"
@@ -73,6 +75,38 @@ const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
         </div>
       </div>
     </div>
+  )
+}
+
+interface BackFaceProps {
+  boardgame: Boardgame
+}
+
+const BackFace = ({ boardgame }: BackFaceProps) => {
+  return (
+    <div className="backface-hidden absolute h-full rotate-y-180">
+      {boardgame.description}
+    </div>
+  )
+}
+
+interface BoardgameCardProps {
+  boardgame: Boardgame
+}
+
+const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
+  const [flipped, setFlipped] = useState(false)
+
+  return (
+    <motion.div
+      className="relative max-w-3xs min-w-3xs md:max-w-2xs md:min-w-2xs h-70 md:h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black) transform-3d"
+      onClick={() => setFlipped((prevState) => !prevState)}
+      animate={{ rotateY: flipped ? 180 : 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <FrontFace boardgame={boardgame} />
+      <BackFace boardgame={boardgame} />
+    </motion.div>
   )
 }
 
