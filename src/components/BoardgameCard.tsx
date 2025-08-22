@@ -5,6 +5,21 @@ import Star from './icons/Star'
 import Player from './icons/Player'
 import Dollar from './icons/Dollar'
 import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
+import type { JSX } from 'react/jsx-dev-runtime'
+
+interface PropertyFieldProps {
+  icon: JSX.Element
+  title: string | number
+}
+
+const PropertyField = ({ icon, title }: PropertyFieldProps) => {
+  return (
+    <div className="flex items-center gap-x-1 text-sm">
+      <span className="w-5 h-5">{icon}</span>
+      <span className="flex">{title}</span>
+    </div>
+  )
+}
 
 interface BoardgameCardProps {
   boardgame: Boardgame
@@ -45,37 +60,16 @@ const BoardgameCard = ({ boardgame }: BoardgameCardProps) => {
         </div>
 
         <div className="grid grid-cols-2 gap-y-2">
-          <div className="flex items-center gap-x-1 text-sm">
-            <span className="w-5 h-5">
-              <Star />
-            </span>
-            <span className="flex">{boardgame.score || '-'}</span>
-          </div>
-
-          <div className="flex items-center gap-x-1 text-sm">
-            <span className="w-5 h-5">
-              <Player />
-            </span>
-            <span className="flex">
-              {boardgame.minPlayers}-{boardgame.maxPlayers}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-x-1 text-sm">
-            <span className="w-5 h-5">
-              <Dollar />
-            </span>
-            <span className="flex">
-              {boardgame.price ? `£${boardgame.price.toFixed(2)}` : '-'}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-x-1 text-sm">
-            <span className="w-5 h-5">
-              <Clock />
-            </span>
-            <span className="flex">{playtime}</span>
-          </div>
+          <PropertyField icon={<Star />} title={boardgame.score || '-'} />
+          <PropertyField
+            icon={<Player />}
+            title={`${boardgame.minPlayers}-${boardgame.maxPlayers}`}
+          />
+          <PropertyField
+            icon={<Dollar />}
+            title={boardgame.price ? `£${boardgame.price.toFixed(2)}` : '-'}
+          />
+          <PropertyField icon={<Clock />} title={playtime} />
         </div>
       </div>
     </div>
