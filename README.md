@@ -1,6 +1,6 @@
-# Boardgame prices 
+# Boardgame prices (wip)
 
-(work and name still in progress)
+[Demo](https://boardgame-prices.vercel.app/)
 
 To put a long story short this is a personal project to practice all things frontend while working on something that I enjoy doing in my free time: buying and playing board games.
 
