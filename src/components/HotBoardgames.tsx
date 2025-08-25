@@ -1,16 +1,30 @@
 import type { Boardgame } from '@/types/boardgame'
-import BoardgameCard from './BoardgameCard'
+import BoardgameCard from './BoardgameCard/BoardgameCard'
 import SkeletonBoardgameCard from './SkeletonBoardgameCard'
 import { useQuery } from '@tanstack/react-query'
 
 const HotBoardgames = () => {
-  const { data: hotBoardgames, isLoading: hotBoardgamesLoading } = useQuery({
+  const {
+    data: hotBoardgames,
+    isLoading: hotBoardgamesLoading,
+    isError: hotBoardgamesError,
+  } = useQuery({
     queryKey: ['hotBoardgames'],
-    queryFn: () => fetch('/api/hot-boardgames').then((res) => res.json()),
+    queryFn: () =>
+      fetch('/api/hot-boardgames').then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+        return res.json()
+      }),
+    retry: 1,
   })
 
-  if (!hotBoardgamesLoading && !hotBoardgames)
+  if (hotBoardgamesError) {
+    return <div>Error loading data.</div>
+  }
+
+  if (!hotBoardgamesLoading && !hotBoardgames) {
     return <div>No data available.</div>
+  }
 
   const skeletonCards = Array.from({ length: 50 }).map((_, index) => (
     <SkeletonBoardgameCard key={index} />

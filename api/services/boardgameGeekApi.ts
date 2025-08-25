@@ -55,7 +55,10 @@ export const parseHotBoardgames = (boardgames: any) => {
     data[id] = {
       id: id,
       name: boardgame.item.children[1].name.value,
-      rank: Number(boardgame.item.rank),
+      rankings: {
+        popularity: Number(boardgame.item.rank),
+        overall: 0,
+      },
     }
   })
   return data
@@ -68,32 +71,67 @@ export const mergeDetails = (details: any, hotBoardgames: BoardgameMap) => {
       if (bgProperty.name && bgProperty.name.type === 'primary') {
         hotBoardgames[id].name = bgProperty.name.value
       }
+
       if (bgProperty.image) {
         hotBoardgames[id].image = bgProperty.image.content
       }
-      //potentially not needed
-      if (bgProperty.description) {
-        hotBoardgames[id].description = bgProperty.description.content
-      }
+
       if (bgProperty.yearpublished) {
         hotBoardgames[id].yearPublished = bgProperty.yearpublished.value
       }
+
       if (bgProperty.minplaytime) {
         hotBoardgames[id].minPlaytime = Number(bgProperty.minplaytime.value)
       }
+
       if (bgProperty.maxplaytime) {
         hotBoardgames[id].maxPlaytime = Number(bgProperty.maxplaytime.value)
       }
+
       if (bgProperty.minplayers) {
         hotBoardgames[id].minPlayers = Number(bgProperty.minplayers.value)
       }
+
       if (bgProperty.maxplayers) {
         hotBoardgames[id].maxPlayers = Number(bgProperty.maxplayers.value)
       }
-      if (bgProperty.statistics) {
-        const score =
-          bgProperty.statistics.children[0].ratings.children[1].average.value
-        hotBoardgames[id].score = Math.round(score * 100) / 100
+      const ratings = bgProperty.statistics?.children[0].ratings
+
+      if (ratings) {
+        ratings.children.forEach((rating: any) => {
+          if (rating.average) {
+            const score = rating.average.value
+            hotBoardgames[id].score = Math.round(score * 100) / 100
+          }
+          if (rating.averageweight) {
+            const weight = rating.averageweight.value
+            hotBoardgames[id].weight = Math.round(weight * 100) / 100
+          }
+          if (rating.ranks) {
+            const overallRank = rating.ranks.children[0].rank.value
+            if (overallRank === 'Not Ranked') {
+              hotBoardgames[id].rankings.overall = 0
+            } else {
+              hotBoardgames[id].rankings.overall = overallRank
+            }
+          }
+        })
+      }
+
+      if (bgProperty.link?.type === 'boardgamecategory') {
+        if (hotBoardgames[id].categories) {
+          hotBoardgames[id].categories.push(bgProperty.link.value)
+        } else {
+          hotBoardgames[id].categories = [bgProperty.link.value]
+        }
+      }
+
+      if (bgProperty.link?.type === 'boardgamemechanic') {
+        if (hotBoardgames[id].mechanics) {
+          hotBoardgames[id].mechanics.push(bgProperty.link.value)
+        } else {
+          hotBoardgames[id].mechanics = [bgProperty.link.value]
+        }
       }
     })
   })

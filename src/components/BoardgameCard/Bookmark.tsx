@@ -1,4 +1,4 @@
-import { default as BookmarkIcon } from './icons/Bookmark'
+import { default as BookmarkIcon } from '../icons/Bookmark'
 
 interface BookmarkProps {
   rank: number
@@ -9,6 +9,7 @@ const Bookmark = ({ rank }: BookmarkProps) => {
     <div className="absolute top-0 left-2 flex items-center rounded fill-(--color-red-1) ">
       <svg width="50px" height="50px">
         <BookmarkIcon />
+
         <text
           x="24"
           y="20"

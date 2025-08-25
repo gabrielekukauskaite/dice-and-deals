@@ -1,6 +1,9 @@
 export interface Boardgame {
   id: string
-  rank: number
+  rankings: {
+    popularity: number
+    overall: number
+  }
   image: string
   name: string
   description: string
@@ -10,13 +13,19 @@ export interface Boardgame {
   maxPlaytime: number
   minPlayers: number
   maxPlayers: number
+  weight: number
+  categories: string[]
+  mechanics: string[]
   price?: number
   priceLink?: string
 }
 
 export interface PartialBoardgame extends Partial<Boardgame> {
   id: string
-  rank: number
+  rankings: {
+    popularity: number
+    overall: number
+  }
   name: string
 }
 

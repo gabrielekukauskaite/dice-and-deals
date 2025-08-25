@@ -21,7 +21,7 @@ const PropertyField = ({ icon }: PropertyFieldProps) => {
 
 const SkeletonBoardgameCard = () => {
   return (
-    <div className="flex flex-col max-w-3xs min-w-3xs md:max-w-2xs md:min-w-2xs h-70 md:h-90 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
+    <div className="flex flex-col max-w-3xs min-w-3xs md:max-w-2xs md:min-w-2xs h-80 md:h-100 bg-(--color-red-4) border-4 rounded-2xl shadow-(--shadow-black)">
       <div className="rounded-t-xl min-h-30 md:min-h-50 border-b-3 bg-(--color-red-2) animate-pulse" />
       <div className="flex flex-col gap-y-2 p-4 pt-2 h-full place-content-between">
         <div

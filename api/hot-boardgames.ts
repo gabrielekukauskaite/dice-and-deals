@@ -34,7 +34,9 @@ export default async function handler(_: VercelRequest, res: VercelResponse) {
     mergePrices(prices, hotBoardgames)
 
     const boardgames = Object.values(hotBoardgames || {}) as Boardgame[]
-    const sortedBoardgamesByRank = boardgames.sort((a, b) => a.rank - b.rank)
+    const sortedBoardgamesByRank = boardgames.sort(
+      (a, b) => a.rankings.popularity - b.rankings.popularity,
+    )
 
     res.status(200).json(sortedBoardgamesByRank)
   } catch (error) {
