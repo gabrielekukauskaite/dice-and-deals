@@ -1,6 +1,6 @@
-import { Boardgame } from '@/types/boardgame'
+import type { Boardgame } from '@/types/boardgame'
 import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
-import { JSX } from 'react'
+import type { JSX } from 'react'
 import Clock from '../icons/Clock'
 import Dollar from '../icons/Dollar'
 import Player from '../icons/Player'

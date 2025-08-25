@@ -1,4 +1,4 @@
-import { Boardgame } from '@/types/boardgame'
+import type { Boardgame } from '@/types/boardgame'
 import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
 
 interface BackFaceProps {
