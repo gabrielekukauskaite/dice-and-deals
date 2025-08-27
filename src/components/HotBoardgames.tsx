@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Boardgame } from '../types/boardgame.ts'
 import BoardgameCard from './BoardgameCard/BoardgameCard.tsx'
 import SkeletonBoardgameCard from './SkeletonBoardgameCard.tsx'
@@ -30,12 +31,23 @@ const HotBoardgames = () => {
     return <div>No data available.</div>
   }
 
+  const [flippedCard, setFlippedCard] = useState<string>()
+
+  const handleCardClick = (id: string) => {
+    setFlippedCard((prev) => (prev === id ? undefined : id))
+  }
+
   const skeletonCards = Array.from({ length: 50 }).map((_, index) => (
     <SkeletonBoardgameCard key={index} />
   ))
 
   const boardgameCards = hotBoardgames?.map((boardgame: Boardgame) => (
-    <BoardgameCard key={boardgame.id} boardgame={boardgame} />
+    <BoardgameCard
+      key={boardgame.id}
+      boardgame={boardgame}
+      flippedCard={flippedCard}
+      onClick={handleCardClick}
+    />
   ))
 
   return (
