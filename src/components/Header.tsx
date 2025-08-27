@@ -10,7 +10,7 @@ export default function Header() {
         <span style={{ minWidth: '50px' }}>
           <D20Dice />
         </span>
-        <span className="hidden md:inline text-base">BOARDGAME PRICES</span>
+        <span className="hidden md:inline text-lg">DICE & DEALS</span>
       </div>
       <nav className="flex flex-col gap-2 p-4 ">
         <div className="py-2">
