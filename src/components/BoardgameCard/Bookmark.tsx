@@ -1,4 +1,4 @@
-import { default as BookmarkIcon } from '../icons/Bookmark'
+import { default as BookmarkIcon } from '../icons/Bookmark.tsx'
 
 interface BookmarkProps {
   rank: number
@@ -7,16 +7,14 @@ interface BookmarkProps {
 const Bookmark = ({ rank }: BookmarkProps) => {
   return (
     <div className="absolute top-0 left-2 flex items-center rounded fill-(--color-red-1) ">
-      <svg width="50px" height="50px">
+      <svg className="w-10 h-10 md:w-12 md:h-12">
         <BookmarkIcon />
 
         <text
-          x="24"
-          y="20"
+          className="text-xs md:text-base font-semibold fill-black"
+          x="50%"
+          y="40%"
           textAnchor="middle"
-          fontSize="18"
-          fill="black"
-          fontWeight="semibold"
         >
           {rank}
         </text>

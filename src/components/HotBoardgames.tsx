@@ -1,6 +1,6 @@
-import type { Boardgame } from '@/types/boardgame'
-import BoardgameCard from './BoardgameCard/BoardgameCard'
-import SkeletonBoardgameCard from './SkeletonBoardgameCard'
+import type { Boardgame } from '../types/boardgame.ts'
+import BoardgameCard from './BoardgameCard/BoardgameCard.tsx'
+import SkeletonBoardgameCard from './SkeletonBoardgameCard.tsx'
 import { useQuery } from '@tanstack/react-query'
 
 const HotBoardgames = () => {
@@ -19,7 +19,11 @@ const HotBoardgames = () => {
   })
 
   if (hotBoardgamesError) {
-    return <div>Error loading data.</div>
+    return (
+      <div className="m-auto">
+        <span>Error loading data.</span>
+      </div>
+    )
   }
 
   if (!hotBoardgamesLoading && !hotBoardgames) {

@@ -1,4 +1,4 @@
-import type { BoardgameMap } from '@/types/boardgame'
+import type { BoardgameMap } from '../../src/types/boardgame.ts'
 
 export const fetchPrices = async (idChunks: string[][]) => {
   try {

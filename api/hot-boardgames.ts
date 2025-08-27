@@ -1,4 +1,4 @@
-import type { Boardgame } from '@/types/boardgame'
+import type { Boardgame, PartialBoardgame } from '../src/types/boardgame.ts'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import {
   fetchDetails,
@@ -7,6 +7,7 @@ import {
   parseHotBoardgames,
 } from './services/boardgameGeekApi.js'
 import { fetchPrices, mergePrices } from './services/boardgamePricesApi.js'
+import useGetBoardgameDescriptions from './services/pollinationsAI.js'
 
 const getIdChunks = (array: string[], chunkSize: number) => {
   const chunks = []
@@ -23,6 +24,10 @@ export default async function handler(_: VercelRequest, res: VercelResponse) {
 
     const hotBoardgames = parseHotBoardgames(hotBoardgamesResponse)
 
+    const boardgameDescriptions = JSON.parse(
+      await useGetBoardgameDescriptions(Object.values(hotBoardgames)),
+    )
+
     const hotBoardgamesIds = Object.keys(hotBoardgames)
 
     const idChunks = hotBoardgamesIds ? getIdChunks(hotBoardgamesIds, 20) : []
@@ -32,6 +37,13 @@ export default async function handler(_: VercelRequest, res: VercelResponse) {
 
     mergeDetails(details, hotBoardgames)
     mergePrices(prices, hotBoardgames)
+
+    boardgameDescriptions.forEach((boardgame: PartialBoardgame) => {
+      const matchingBoardgame = hotBoardgames[boardgame.id]
+      if (matchingBoardgame) {
+        matchingBoardgame.description = boardgame.description
+      }
+    })
 
     const boardgames = Object.values(hotBoardgames || {}) as Boardgame[]
     const sortedBoardgamesByRank = boardgames.sort(

@@ -1,12 +1,12 @@
-import type { Boardgame } from '@/types/boardgame'
-import { decodeHTMLEntities } from '@/utils/decodeHTMLEntities'
+import type { Boardgame } from '../../types/boardgame.ts'
+import { decodeHTMLEntities } from '../../utils/decodeHTMLEntities.ts'
 import type { JSX } from 'react'
-import Clock from '../icons/Clock'
-import Dollar from '../icons/Dollar'
-import Player from '../icons/Player'
-import Star from '../icons/Star'
-import Bookmark from './Bookmark'
-import Brains from '../icons/Brains'
+import Clock from '../icons/Clock.tsx'
+import Player from '../icons/Player.tsx'
+import Star from '../icons/Star.tsx'
+import Bookmark from './Bookmark.tsx'
+import Brains from '../icons/Brains.tsx'
+import Forward from '../icons/Forward.tsx'
 
 const missingInformationText = '--'
 
@@ -61,36 +61,36 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
         <Bookmark rank={boardgame.rankings.popularity} />
 
         <div className="absolute -top-1 -right-1 flex border-3 rounded-tr-2xl rounded-bl-2xl bg-(--color-red-1) p-1 items-center flex gap-x-1">
-          <span className="w-3">
-            <Star />
+          <span className="text-sm md:text-base">
+            {boardgame.price != null
+              ? `£${boardgame.price.toFixed(2)}`
+              : 'Unavailable'}
           </span>
-          <span className="text-base">{boardgame.score.toPrecision(2)}</span>
         </div>
       </div>
 
       <div className="flex flex-col gap-y-2 p-4 pt-2 h-full place-content-between">
-        <span className="font-bold text-sm md:text-base">
+        <span className="font-bold text-xs md:text-sm uppercase">
           {decodeHTMLEntities(boardgame.name)}
         </span>
 
         <div className="grid grid-cols-2 gap-y-2">
           <PropertyField
+            icon={<Star />}
+            title={boardgame.score.toPrecision(2)}
+          />
+          <PropertyField icon={<Brains />} title={difficulty} />
+          <PropertyField
             icon={<Player />}
             title={`${boardgame.minPlayers}-${boardgame.maxPlayers}`}
           />
-          <PropertyField icon={<Brains />} title={difficulty} />
-
           <PropertyField icon={<Clock />} title={playtime} />
-          <PropertyField
-            icon={<Dollar />}
-            title={
-              boardgame.price
-                ? `£${boardgame.price.toFixed(2)}`
-                : missingInformationText
-            }
-          />
         </div>
       </div>
+
+      <span className="absolute bottom-2 right-2 w-4 fill-white opacity-50">
+        <Forward />
+      </span>
     </div>
   )
 }

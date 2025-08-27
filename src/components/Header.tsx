@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
-import D20Dice from './icons/D20Dice'
-import WinCup from './icons/WinCup'
-import Fire from './icons/Fire'
+import D20Dice from './icons/D20Dice.tsx'
+import WinCup from './icons/WinCup.tsx'
+import Fire from './icons/Fire.tsx'
 
 export default function Header() {
   return (
@@ -27,7 +27,7 @@ export default function Header() {
             <span className="block md:hidden">
               <WinCup />
             </span>
-            <span className="hidden md:block">BEST OF THE BEST</span>
+            <span className="hidden md:block">BESTEST</span>
           </Link>
         </div>
       </nav>
