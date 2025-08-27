@@ -1,4 +1,4 @@
-# Boardgame prices (wip)
+# Dice & Deals (wip)
 
 [Demo](https://boardgame-prices.vercel.app/)
 
