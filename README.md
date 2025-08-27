@@ -7,7 +7,7 @@ To put a long story short this is a personal project to practice all things fron
 The aim is to create a website for finding interesting boardgames and seeing how much would it cost to get one delivered in the UK.
 It combines boardgamegeek.com api with boardgameprices.co.uk api to achieve the above.
 
-While the aforementioned websites are very functional they don't really spark much joy, so I wanted something colorful, modern, and different... That's why I decided to go for a neobrutalism style which felt like a perfect theme to experiment with.
+While the aforementioned websites are very functional they don't really spark much joy, so I wanted something colorful, modern, and different... That's why I decided to go for a neobrutalism(ish) style which felt like a perfect theme to experiment with.
 
 Here is a screenshot displaying 50 most popular games:
 
