@@ -77,7 +77,7 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
         <div className="grid grid-cols-2 gap-y-2">
           <PropertyField
             icon={<Star />}
-            title={boardgame.score.toPrecision(2)}
+            title={boardgame.score?.toPrecision(2)}
           />
           <PropertyField icon={<Brains />} title={difficulty} />
           <PropertyField

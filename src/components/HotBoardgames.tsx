@@ -2,22 +2,14 @@ import { useState } from 'react'
 import type { Boardgame } from '../types/boardgame.ts'
 import BoardgameCard from './BoardgameCard/BoardgameCard.tsx'
 import SkeletonBoardgameCard from './SkeletonBoardgameCard.tsx'
-import { useQuery } from '@tanstack/react-query'
+import useGetAutoInfiniteBoardgames from '../hooks/useGetAutoInifiniteBoardgames.ts'
 
 const HotBoardgames = () => {
   const {
     data: hotBoardgames,
     isLoading: hotBoardgamesLoading,
     isError: hotBoardgamesError,
-  } = useQuery({
-    queryKey: ['hotBoardgames'],
-    queryFn: () =>
-      fetch('/api/hot-boardgames').then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-        return res.json()
-      }),
-    retry: 1,
-  })
+  } = useGetAutoInfiniteBoardgames()
 
   if (hotBoardgamesError) {
     return (
@@ -37,18 +29,20 @@ const HotBoardgames = () => {
     setFlippedCard((prev) => (prev === id ? undefined : id))
   }
 
-  const skeletonCards = Array.from({ length: 50 }).map((_, index) => (
+  const skeletonCards = Array.from({ length: 10 }).map((_, index) => (
     <SkeletonBoardgameCard key={index} />
   ))
 
-  const boardgameCards = hotBoardgames?.map((boardgame: Boardgame) => (
-    <BoardgameCard
-      key={boardgame.id}
-      boardgame={boardgame}
-      flippedCard={flippedCard}
-      onClick={handleCardClick}
-    />
-  ))
+  const boardgameCards = hotBoardgames?.pages.flatMap((page) =>
+    page.boardgames.map((boardgame: Boardgame) => (
+      <BoardgameCard
+        key={boardgame.id}
+        boardgame={boardgame}
+        flippedCard={flippedCard}
+        onClick={handleCardClick}
+      />
+    )),
+  )
 
   return (
     <div className="flex flex-wrap gap-8 p-4 md:p-8 justify-center bg-(--color-red-1) overflow-auto">

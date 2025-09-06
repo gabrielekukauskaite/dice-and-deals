@@ -29,4 +29,4 @@ export interface PartialBoardgame extends Partial<Boardgame> {
   name: string
 }
 
-export type BoardgameMap = { [key: string]: PartialBoardgame }
+export type BoardgameMap = Map<string, PartialBoardgame>

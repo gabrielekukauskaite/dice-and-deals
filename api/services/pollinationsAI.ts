@@ -1,4 +1,4 @@
-import { PartialBoardgame } from '../../src/types/boardgame.ts'
+import { PartialBoardgame } from '../../src/types/boardgame.js'
 
 export async function getBoardgameDescription(boardgames: PartialBoardgame[]) {
   const boardgamesIdName = boardgames?.map(
@@ -10,7 +10,7 @@ export async function getBoardgameDescription(boardgames: PartialBoardgame[]) {
   const prompt = `
       For each game, write one action-oriented sentence, maximum 20 words.
       Vary the style, verbs, and structure so descriptions feel distinct.
-      Return only valid JSON with { id, name, description } for each game.
+      Return only valid JSON with { id, description } for each game.
       Games:${JSON.stringify(boardgamesIdName)}
     `
   try {
