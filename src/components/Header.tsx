@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import D20Dice from './icons/D20Dice.tsx'
-import WinCup from './icons/WinCup.tsx'
+// import WinCup from './icons/WinCup.tsx'
 import Fire from './icons/Fire.tsx'
 
 export default function Header() {
