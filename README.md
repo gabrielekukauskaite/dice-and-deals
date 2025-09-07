@@ -11,4 +11,4 @@ While the aforementioned websites are very functional they don't really spark mu
 
 Here is a screenshot displaying 50 most popular games:
 
-<img width="1920" height="913" alt="Screenshot of the app" src="https://github.com/user-attachments/assets/e81d13fe-7e87-4fb7-ba81-1d1478c679d9" />
+<img width="1920" height="911" alt="Screenshot 2025-09-07 174952" src="https://github.com/user-attachments/assets/ce331806-3467-4f97-a8ad-82725a79e0f6" />
