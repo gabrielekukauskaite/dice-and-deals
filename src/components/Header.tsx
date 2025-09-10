@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import D20Dice from './icons/D20Dice.tsx'
-// import WinCup from './icons/WinCup.tsx'
+import WinCup from './icons/WinCup.tsx'
 import Fire from './icons/Fire.tsx'
 
 export default function Header() {
@@ -22,14 +22,14 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* <div className="py-2">
+        <div className="py-2">
           <Link activeProps={{ className: 'text-white' }} to="/best">
             <span className="block md:hidden">
               <WinCup />
             </span>
             <span className="hidden md:block">BESTEST</span>
           </Link>
-        </div> */}
+        </div>
       </nav>
     </header>
   )

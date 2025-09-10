@@ -44,9 +44,11 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
   const difficulty = (() => {
     const weight = boardgame.weight
     if (weight === 0) return missingInformationText
-    if (weight < 2) return 'Easy'
+    if (weight < 1.5) return 'Very Easy'
+    if (weight < 2.5) return 'Easy'
     if (weight < 3.5) return 'Medium'
-    return 'Hard'
+    if (weight < 4.5) return 'Hard'
+    return 'Very Hard'
   })()
 
   return (
@@ -58,7 +60,9 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
           src={boardgame.image}
         />
 
-        <Bookmark rank={boardgame.rankings.popularity} />
+        <Bookmark
+          rank={boardgame.rankings?.popularity || boardgame.rankings?.overall}
+        />
 
         <div className="absolute -top-1 -right-1 flex border-3 rounded-tr-2xl rounded-bl-2xl bg-(--color-red-1) p-1 items-center flex gap-x-1">
           <span className="text-sm md:text-base">

@@ -2,16 +2,17 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 const PAGE_SIZE = 10
 
-const useGetAutoInfiniteBoardgames = () => {
+const useGetAutoInfiniteBoardgames = (endpointName: string) => {
   const query = useInfiniteQuery({
-    queryKey: ['hotBoardgames'],
+    queryKey: [endpointName],
     queryFn: async ({ pageParam = 1 }) => {
       const res = await fetch(
-        `/api/hot-boardgames?page=${pageParam}&pageSize=${PAGE_SIZE}`,
+        `/api/${endpointName}?page=${pageParam}&pageSize=${PAGE_SIZE}`,
       )
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
       return res.json()
     },
+    staleTime: 1000 * 60 * 5, // 5 minutes
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.total > PAGE_SIZE * lastPage.page) {
         return allPages.length + 1

@@ -4,14 +4,14 @@ import BoardgameCard from './BoardgameCard/BoardgameCard.tsx'
 import SkeletonBoardgameCard from './SkeletonBoardgameCard.tsx'
 import useGetAutoInfiniteBoardgames from '../hooks/useGetAutoInifiniteBoardgames.ts'
 
-const HotBoardgames = () => {
+const TopBoardgames = () => {
   const {
-    data: hotBoardgames,
-    isLoading: hotBoardgamesLoading,
-    isError: hotBoardgamesError,
-  } = useGetAutoInfiniteBoardgames('hot-boardgames')
+    data: topBoardgames,
+    isLoading: topBoardgamesLoading,
+    isError: topBoardgamesError,
+  } = useGetAutoInfiniteBoardgames('top-boardgames')
 
-  if (hotBoardgamesError) {
+  if (topBoardgamesError) {
     return (
       <div className="m-auto">
         <span>Error loading data.</span>
@@ -19,7 +19,7 @@ const HotBoardgames = () => {
     )
   }
 
-  if (!hotBoardgamesLoading && !hotBoardgames) {
+  if (!topBoardgamesLoading && !topBoardgames) {
     return <div>No data available.</div>
   }
 
@@ -33,7 +33,7 @@ const HotBoardgames = () => {
     <SkeletonBoardgameCard key={index} />
   ))
 
-  const boardgameCards = hotBoardgames?.pages.flatMap((page) =>
+  const boardgameCards = topBoardgames?.pages.flatMap((page) =>
     page.boardgames.map((boardgame: Boardgame) => (
       <BoardgameCard
         key={boardgame.id}
@@ -46,12 +46,11 @@ const HotBoardgames = () => {
 
   return (
     <div className="flex flex-col h-full bg-(--color-red-1) overflow-auto p-4 md:p-8">
-      {/* <span className="text-3xl font-bold mb-4">THE HOTNESS</span> */}
       <div className="flex flex-wrap gap-8 justify-center ">
-        {hotBoardgamesLoading ? skeletonCards : boardgameCards}
+        {topBoardgamesLoading ? skeletonCards : boardgameCards}
       </div>
     </div>
   )
 }
 
-export default HotBoardgames
+export default TopBoardgames

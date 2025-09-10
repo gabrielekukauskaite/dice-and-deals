@@ -1,8 +1,8 @@
 export interface Boardgame {
   id: string
-  rankings: {
-    popularity: number
-    overall: number
+  rankings?: {
+    popularity?: number
+    overall?: number
   }
   image: string
   name: string
@@ -22,9 +22,9 @@ export interface Boardgame {
 
 export interface PartialBoardgame extends Partial<Boardgame> {
   id: string
-  rankings: {
-    popularity: number
-    overall: number
+  rankings?: {
+    popularity?: number
+    overall?: number
   }
   name: string
 }
