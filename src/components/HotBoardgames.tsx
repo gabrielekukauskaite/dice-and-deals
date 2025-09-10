@@ -9,6 +9,7 @@ const HotBoardgames = () => {
     data: hotBoardgames,
     isLoading: hotBoardgamesLoading,
     isError: hotBoardgamesError,
+    isFetchingNextPage: hotBoardgamesFetchingNextPage,
   } = useGetAutoInfiniteBoardgames('hot-boardgames')
 
   if (hotBoardgamesError) {
@@ -45,10 +46,13 @@ const HotBoardgames = () => {
   )
 
   return (
-    <div className="flex flex-col h-full bg-(--color-red-1) overflow-auto p-4 md:p-8">
+    <div className="flex flex-col h-full bg-(--color-yellow) overflow-auto p-4 md:p-8">
       {/* <span className="text-3xl font-bold mb-4">THE HOTNESS</span> */}
       <div className="flex flex-wrap gap-8 justify-center ">
         {hotBoardgamesLoading ? skeletonCards : boardgameCards}
+      </div>
+      <div className="self-center mt-8">
+        {hotBoardgamesFetchingNextPage && '...LOADING MORE...'}
       </div>
     </div>
   )

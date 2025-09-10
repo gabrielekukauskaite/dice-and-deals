@@ -3,10 +3,11 @@
 
 @theme {
   --shadow-black: 5px 5px 0px black;
-  --color-red-1: #f8d6b3;
-  --color-red-2: #ffa07a;
-  --color-red-3: #ff7a5c;
-  --color-red-4: #ff6b6b;
+  --color-pale-yellow: #f9e780;
+  --color-yellow: #f4d738;
+  --color-blue: #7d83db;
+  --color-pink: #ff819d;
+  --color-red: #ff6b6b;
 }
 
 :root {

@@ -9,6 +9,7 @@ const TopBoardgames = () => {
     data: topBoardgames,
     isLoading: topBoardgamesLoading,
     isError: topBoardgamesError,
+    isFetchingNextPage: topBoardgamesFetchingNextPage,
   } = useGetAutoInfiniteBoardgames('top-boardgames')
 
   if (topBoardgamesError) {
@@ -45,9 +46,12 @@ const TopBoardgames = () => {
   )
 
   return (
-    <div className="flex flex-col h-full bg-(--color-red-1) overflow-auto p-4 md:p-8">
+    <div className="flex flex-col h-full bg-(--color-yellow) overflow-auto p-4 md:p-8">
       <div className="flex flex-wrap gap-8 justify-center ">
         {topBoardgamesLoading ? skeletonCards : boardgameCards}
+      </div>
+      <div className="self-center mt-8">
+        {topBoardgamesFetchingNextPage && '...LOADING MORE...'}
       </div>
     </div>
   )

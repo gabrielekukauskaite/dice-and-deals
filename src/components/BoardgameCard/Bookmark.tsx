@@ -6,7 +6,7 @@ interface BookmarkProps {
 
 const Bookmark = ({ rank }: BookmarkProps) => {
   return (
-    <div className="absolute top-0 left-2 flex items-center rounded fill-(--color-red-1) ">
+    <div className="absolute top-0 left-2 flex items-center rounded fill-(--color-yellow) ">
       <svg className="w-10 h-10 md:w-12 md:h-12">
         <BookmarkIcon />
 

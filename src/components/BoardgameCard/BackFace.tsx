@@ -11,7 +11,7 @@ interface BackFaceProps {
 const BackFace = ({ boardgame }: BackFaceProps) => {
   return (
     <div className="backface-hidden absolute h-full rotate-y-180 w-full flex flex-col">
-      <div className="font-bold text-sm border-b-3 p-4 pt-2 pb-2 bg-(--color-red-2) rounded-t-xl flex flex-col gap-y-1">
+      <div className="font-bold text-sm border-b-3 p-4 pt-2 pb-2 bg-(--color-red) rounded-t-xl flex flex-col gap-y-1">
         <span>{decodeHTMLEntities(boardgame.name)}</span>
         <a
           className="flex text-xs opacity-70"
@@ -27,12 +27,12 @@ const BackFace = ({ boardgame }: BackFaceProps) => {
         </a>
       </div>
 
-      <div className="flex flex-col pt-2 p-4 h-full justify-between">
+      <div className="flex flex-col pt-2 p-4 h-full justify-between bg-(--color-pink) rounded-b-2xl">
         <div className="text-sm md:text-base">{boardgame.description}</div>
 
         {boardgame.priceLink && (
           <motion.a
-            className="border-3 text-sm md:text-base rounded-md px-2 py-1 shadow-(--shadow-black) bg-(--color-red-1) w-fit"
+            className="border-3 text-sm md:text-base rounded-md px-2 py-1 shadow-(--shadow-black) bg-(--color-yellow) w-fit"
             href={boardgame.priceLink}
             target="_blank"
             rel="noopener noreferrer"

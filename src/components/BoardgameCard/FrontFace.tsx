@@ -64,7 +64,7 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
           rank={boardgame.rankings?.popularity || boardgame.rankings?.overall}
         />
 
-        <div className="absolute -top-1 -right-1 flex border-3 rounded-tr-2xl rounded-bl-2xl bg-(--color-red-1) p-1 items-center flex gap-x-1">
+        <div className="absolute -top-1 -right-1 flex border-3 rounded-tr-2xl rounded-bl-2xl bg-(--color-yellow) p-1 items-center flex gap-x-1">
           <span className="text-sm md:text-base">
             {boardgame.price != null
               ? `£${boardgame.price.toFixed(2)}`

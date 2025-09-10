@@ -5,7 +5,7 @@ import Fire from './icons/Fire.tsx'
 
 export default function Header() {
   return (
-    <header className="flex flex-col max-w-[4rem] md:min-w-3xs md:max-w-3xs bg-(--color-red-2) font-bold text-lg border-r-3 ">
+    <header className="flex flex-col max-w-[4rem] md:min-w-3xs md:max-w-3xs bg-(--color-pink) font-bold text-lg border-r-3 ">
       <div className="flex border-b-3 p-2 items-center gap-x-2">
         <span style={{ minWidth: '50px' }}>
           <D20Dice />
