@@ -55,7 +55,8 @@ export const parseHotBoardgames = (boardgames: any) => {
   })
 
   const sortedEntries = Array.from(boardgameMap.entries()).sort(
-    ([_idA, a], [_idB, b]) => a.rankings.popularity - b.rankings.popularity,
+    ([_idA, a], [_idB, b]) =>
+      (a.rankings.popularity ?? 0) - (b.rankings.popularity ?? 0),
   )
 
   return new Map(sortedEntries)
