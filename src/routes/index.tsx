@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
-import HotBoardgames from '../components/HotBoardgames.tsx'
+import BoardgamesGrid from '@/components/BoardgamesGrid.tsx'
 
 export const Route = createFileRoute('/')({
   component: Index,
 })
 
 function Index() {
-  return <HotBoardgames />
+  return <BoardgamesGrid type="hot" />
 }

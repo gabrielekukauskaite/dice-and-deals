@@ -4,15 +4,21 @@ import BoardgameCard from './BoardgameCard/BoardgameCard.tsx'
 import SkeletonBoardgameCard from './SkeletonBoardgameCard.tsx'
 import useGetAutoInfiniteBoardgames from '../hooks/useGetAutoInifiniteBoardgames.ts'
 
-const TopBoardgames = () => {
-  const {
-    data: topBoardgames,
-    isLoading: topBoardgamesLoading,
-    isError: topBoardgamesError,
-    isFetchingNextPage: topBoardgamesFetchingNextPage,
-  } = useGetAutoInfiniteBoardgames('top-boardgames')
+interface BoardgamesGridProps {
+  type: 'hot' | 'top'
+}
 
-  if (topBoardgamesError) {
+const BoardgamesGrid = ({ type }: BoardgamesGridProps) => {
+  const {
+    data: boardgames,
+    isLoading: isBoardgamesLoading,
+    isError: isBoardgamesError,
+    isFetchingNextPage: isBoardgamesFetchingNextPage,
+  } = useGetAutoInfiniteBoardgames(`${type}-boardgames`)
+
+  const [flippedCard, setFlippedCard] = useState<string>()
+
+  if (isBoardgamesError) {
     return (
       <div className="m-auto">
         <span>Error loading data.</span>
@@ -20,11 +26,9 @@ const TopBoardgames = () => {
     )
   }
 
-  if (!topBoardgamesLoading && !topBoardgames) {
+  if (!isBoardgamesLoading && !boardgames) {
     return <div>No data available.</div>
   }
-
-  const [flippedCard, setFlippedCard] = useState<string>()
 
   const handleCardClick = (id: string) => {
     setFlippedCard((prev) => (prev === id ? undefined : id))
@@ -34,7 +38,7 @@ const TopBoardgames = () => {
     <SkeletonBoardgameCard key={index} />
   ))
 
-  const boardgameCards = topBoardgames?.pages.flatMap((page) =>
+  const boardgameCards = boardgames?.pages.flatMap((page) =>
     page.boardgames.map((boardgame: Boardgame) => (
       <BoardgameCard
         key={boardgame.id}
@@ -46,15 +50,15 @@ const TopBoardgames = () => {
   )
 
   return (
-    <div className="flex flex-col h-full bg-(--color-yellow) overflow-auto p-4 md:p-8">
-      <div className="flex flex-wrap gap-8 justify-center ">
-        {topBoardgamesLoading ? skeletonCards : boardgameCards}
+    <div className="flex flex-col h-full w-full bg-(--color-yellow) overflow-auto p-4 md:p-8">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,max-content))] gap-8 justify-center">
+        {isBoardgamesLoading ? skeletonCards : boardgameCards}
       </div>
       <div className="self-center mt-8">
-        {topBoardgamesFetchingNextPage && '...LOADING MORE...'}
+        {isBoardgamesFetchingNextPage && '...LOADING MORE...'}
       </div>
     </div>
   )
 }
 
-export default TopBoardgames
+export default BoardgamesGrid

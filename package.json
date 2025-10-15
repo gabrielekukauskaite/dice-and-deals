@@ -1,5 +1,5 @@
 {
-  "name": "boardgame-prices",
+  "name": "dice-and-deals",
   "private": true,
   "type": "module",
   "scripts": {
@@ -38,7 +38,7 @@
     "prettier": "^3.5.3",
     "prettier-eslint": "^16.4.2",
     "typescript": "^5.7.2",
-    "vercel": "^46.0.2",
+    "vercel": "^48.2.6",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",
     "web-vitals": "^4.2.4"

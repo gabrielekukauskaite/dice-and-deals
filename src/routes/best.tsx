@@ -1,4 +1,4 @@
-import TopBoardgames from '@/components/TopBoardgames.tsx'
+import BoardgamesGrid from '@/components/BoardgamesGrid.tsx'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/best')({
@@ -6,5 +6,5 @@ export const Route = createFileRoute('/best')({
 })
 
 function Best() {
-  return <TopBoardgames />
+  return <BoardgamesGrid type="top" />
 }
