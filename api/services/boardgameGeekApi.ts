@@ -3,12 +3,17 @@ import simpleXmlToJson from 'simple-xml-to-json'
 
 const { convertXML } = simpleXmlToJson
 
-export const fetchHotBoardgames = async () => {
-  try {
-    const response = await fetch(
-      'https://www.boardgamegeek.com/xmlapi2/hot?type=boardgames',
-    )
+const BASE_URL = 'https://boardgamegeek.com/xmlapi2/'
+const BGG_API_TOKEN = process.env.BGG_API_TOKEN
 
+export const fetchHotBoardgames = async () => {
+  const url = `${BASE_URL}hot?type=boardgames`
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${BGG_API_TOKEN}`,
+      },
+    })
     if (!response.ok) {
       throw new Error('Failed to fetch hot boardgames')
     }
@@ -24,9 +29,13 @@ export const fetchHotBoardgames = async () => {
 
 export const fetchDetails = async (ids: string[]) => {
   try {
-    const url = `https://www.boardgamegeek.com/xmlapi2/thing?stats=1&id=${ids.join(',')}`
+    const url = `${BASE_URL}thing?stats=1&id=${ids.join(',')}`
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${BGG_API_TOKEN}`,
+      },
+    })
     if (!response.ok) {
       throw new Error(`Failed to fetch boardgame details for URL: ${url}`)
     }

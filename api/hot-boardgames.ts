@@ -76,6 +76,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'Something went wrong' })
+    res.status(500).json(error)
   }
 }
