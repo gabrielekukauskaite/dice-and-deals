@@ -117,6 +117,11 @@ export const mergeDetails = (details: any, hotBoardgames: BoardgameMap) => {
             const weight = rating.averageweight.value
             game.weight = Math.round(weight * 100) / 100
           }
+
+          //TODO: because i'm using a csv sheet for the top 100 overall ranks and if there have been changes in the ranks
+          //this will update the rank with the most recent rank which means that the overall rank might be different from the one in the csv
+          //which then means that the order of the top 100 might be different from the csv
+          //need to either ignore the most uptodate rankings or update csv regularly
           if (rating.ranks) {
             const overallRank = rating.ranks.children[0].rank.value
             if (overallRank === 'Not Ranked') {

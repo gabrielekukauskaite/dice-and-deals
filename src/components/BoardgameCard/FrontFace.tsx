@@ -74,7 +74,7 @@ const FrontFace = ({ boardgame }: FrontFaceProps) => {
       </div>
 
       <div className="flex flex-col gap-y-2 p-4 pt-2 h-full place-content-between">
-        <span className="font-bold text-xs md:text-sm uppercase">
+        <span className="font-bold text-sm md:text-m uppercase">
           {decodeHTMLEntities(boardgame.name)}
         </span>
 

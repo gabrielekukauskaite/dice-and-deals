@@ -49,9 +49,14 @@ const BoardgamesGrid = ({ type }: BoardgamesGridProps) => {
     )),
   )
 
+  const title = type === 'hot' ? 'HOT RIGHT NOW' : 'HALL OF FAME'
+
   return (
-    <div className="flex flex-col h-full w-full bg-(--color-yellow) overflow-auto p-4 md:p-8">
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,max-content))] gap-8 justify-center">
+    <div className="flex flex-col h-full w-full bg-(--color-yellow) overflow-auto p-4 md:p-8 md:pt-4 gap-4">
+      <h1 className="md:text-7xl text-4xl tracking-widest font-bold self-center text-white text-stroke font-[Rubik] text-shadow-(--text-shadow-black)">
+        {title}
+      </h1>
+      <div className="flex flex-wrap gap-8 justify-center">
         {isBoardgamesLoading ? skeletonCards : boardgameCards}
       </div>
       <div className="self-center mt-8">

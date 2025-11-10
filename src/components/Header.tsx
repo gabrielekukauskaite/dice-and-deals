@@ -1,35 +1,25 @@
 import { Link } from '@tanstack/react-router'
 import D20Dice from './icons/D20Dice.tsx'
-import WinCup from './icons/WinCup.tsx'
-import Fire from './icons/Fire.tsx'
 
 export default function Header() {
   return (
-    <header className="flex flex-col max-w-[4rem] md:min-w-3xs md:max-w-3xs bg-(--color-pink) font-bold text-lg border-r-3 ">
-      <div className="flex border-b-3 p-2 items-center gap-x-2">
-        <span style={{ minWidth: '50px' }}>
+    <header className="flex border-b-3 bg-(--color-pink) font-bold text-lg h-18">
+      <div className="flex tracking-widest border-r-3 border-black p-2 px-4 text-3xl">
+        <span className="inline sm:hidden w-12">
           <D20Dice />
         </span>
-        <span className="hidden md:inline text-lg">DICE & DEALS</span>
+        <span className="hidden sm:block content-center text-shadow-(--text-shadow-black) text-(--color-yellow)">
+          DICE & DEALS
+        </span>
       </div>
-      <nav className="flex flex-col gap-2 p-4 ">
-        <div className="py-2">
-          <Link activeProps={{ className: 'text-white' }} to="/">
-            <span className="block md:hidden">
-              <Fire />
-            </span>
-            <span className="hidden md:block">HOTNESS</span>
-          </Link>
-        </div>
+      <nav className="flex flex-1 gap-4 p-2 px-4 items-center">
+        <Link activeProps={{ className: 'text-white' }} to="/">
+          <span>TRENDING</span>
+        </Link>
 
-        <div className="py-2">
-          <Link activeProps={{ className: 'text-white' }} to="/best">
-            <span className="block md:hidden">
-              <WinCup />
-            </span>
-            <span className="hidden md:block">BESTEST</span>
-          </Link>
-        </div>
+        <Link activeProps={{ className: 'text-white' }} to="/best">
+          <span>CLASSICS</span>
+        </Link>
       </nav>
     </header>
   )
