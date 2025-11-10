@@ -5,33 +5,24 @@ import { fetchPrices, mergePrices } from './services/boardgamePricesApi.js'
 import useGetBoardgameDescriptions from './services/pollinationsAI.js'
 import { parseHotBoardgamesCsv } from './services/boardgameRanksCsvParser.js'
 
-let cachedTopBoardgames: BoardgameMap = new Map()
-let cacheTimestamp = 0
-const CACHE_DURATION = 1000 * 60 * 5 // 5 minutes
-
 //need to add better error handling
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const page = parseInt((req.query.page as string) || '1', 10)
     const pageSize = parseInt((req.query.pageSize as string) || '10', 10)
 
-    const now = Date.now()
-
-    // If cached boardgames are empty or expired, fetch new data
-    if (!cachedTopBoardgames || now - cacheTimestamp > CACHE_DURATION) {
-      const topBoardgames = parseHotBoardgamesCsv()
-      cachedTopBoardgames = new Map(
-        topBoardgames.map((boardgame) => [boardgame.id, boardgame]),
-      )
-      cacheTimestamp = now
-    }
+    const topBoardgames = parseHotBoardgamesCsv()
+    const topBoardgamesMap: BoardgameMap = new Map(
+      topBoardgames.map((boardgame) => [boardgame.id, boardgame]),
+    )
 
     const startingIndex = (page - 1) * pageSize
     const endingIndex = startingIndex + pageSize
 
-    const currentPageBoardgames = Array.from(
-      cachedTopBoardgames.values(),
-    ).slice(startingIndex, endingIndex)
+    const currentPageBoardgames = Array.from(topBoardgamesMap.values()).slice(
+      startingIndex,
+      endingIndex,
+    )
 
     const currentPageBoardgameIds = currentPageBoardgames.map(
       (boardgame) => boardgame.id,
@@ -42,8 +33,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       fetchPrices(currentPageBoardgameIds),
     ])
 
-    mergeDetails(details, cachedTopBoardgames)
-    mergePrices(prices.items, cachedTopBoardgames)
+    mergeDetails(details, topBoardgamesMap)
+    mergePrices(prices.items, topBoardgamesMap)
 
     let boardgameDescriptions: any[] = []
     try {
@@ -55,13 +46,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     boardgameDescriptions.forEach((boardgame: any) => {
-      const matchingBoardgame = cachedTopBoardgames.get(boardgame.id)
+      const matchingBoardgame = topBoardgamesMap.get(boardgame.id)
       if (matchingBoardgame) {
         matchingBoardgame.description = boardgame.description
       }
     })
 
-    const boardgames = Array.from(cachedTopBoardgames.values()).slice(
+    const boardgames = Array.from(topBoardgamesMap.values()).slice(
       (page - 1) * pageSize,
       page * pageSize,
     ) as Boardgame[]
@@ -69,7 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(200).json({
       page,
       pageSize,
-      total: cachedTopBoardgames.size,
+      total: topBoardgamesMap.size,
       boardgames,
     })
   } catch (error) {

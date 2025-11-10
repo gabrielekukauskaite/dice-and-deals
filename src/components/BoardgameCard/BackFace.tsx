@@ -8,6 +8,7 @@ interface BackFaceProps {
   boardgame: Boardgame
 }
 
+//TODO: add if the game is cooperative or not
 const BackFace = ({ boardgame }: BackFaceProps) => {
   return (
     <div className="backface-hidden absolute h-full rotate-y-180 w-full flex flex-col">
