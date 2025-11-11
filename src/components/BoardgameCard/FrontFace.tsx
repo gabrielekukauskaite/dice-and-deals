@@ -17,9 +17,9 @@ interface PropertyFieldProps {
 
 const PropertyField = ({ icon, title }: PropertyFieldProps) => {
   return (
-    <div className="flex items-center gap-x-1 text-sm">
+    <div className="flex items-center gap-x-1 text-m">
       <span className="w-5 h-5">{icon}</span>
-      <span className="flex">{title}</span>
+      <span className="flex h-5">{title}</span>
     </div>
   )
 }
